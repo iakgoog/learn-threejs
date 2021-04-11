@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js" integrity="sha512-U4J4PbEJ2TMjFqPUSiKq7LLTHuEkPZVo0jl2fomi9pT7UAExh4xVi8KmoR7EfmyigH95aA68zpW7y3XzuoSurQ==" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var renderer;
+    var scene;
+    var camera;
+
+    function init() {
+      // create a scene, that will hold all our elements such as objects, cameras and lights.
+      scene = new THREE.Scene();
+      // create a camera, which define where we looking at.
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      // position and point the camera to the center
+      camera.position.x = 15;
+      camera.position.y = 16;
+      camera.position.z = 13;
+      camera.lookAt(scene.position);
+      // create a renderer, set the background color and size
+      renderer = new THREE.WebGLRenderer();
+      renderer.setClearColor(0x000000, 1.0);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      // create a cube and add to scene
+      var cubeGeometry = new THREE.BoxGeometry(10 * Math.random(), 10 * Math.random(), 10 * Math.random());
+      var cubeMaterial = new THREE.MeshNormalMaterial();
+      var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+      scene.add(cube);
+      // add the output of the renderer to the html element
+      document.body.appendChild(renderer.domElement);
+      // call the render function
+      render();
+    }
+
+    function render() {
+      renderer.render(scene, camera);
+    }
+
+    window.onload = init;
+
+  </script>
+</body>
+</html>
